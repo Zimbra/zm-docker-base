@@ -8,9 +8,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: 'Build container'
           command: |
             docker build -t f9teams/zmc-base:${CIRCLE_SHA1} .
       - deploy:
+          name: 'Publisher container if master'
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
