@@ -13,6 +13,8 @@ jobs:
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
               docker tag f9teams/zmc-base:${CIRCLE_SHA1} f9teams/zmc-base:latest
               docker tag f9teams/zmc-base:${CIRCLE_SHA1} f9teams/zmc-base:${CIRCLE_BUILD_NUM}
 
