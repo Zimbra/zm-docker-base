@@ -1,13 +1,27 @@
 FROM ubuntu:16.04
 
 RUN apt-get update && \
-  apt-get install -y \
-  # install basics
-  vim wget curl gettext slay python python-pip \
-  # install zimbra pre-requisites
-  ant ant-contrib build-essential git maven \
-  openjdk-8-jdk ruby net-tools rsyslog npm \
-  software-properties-common
+    apt-get install -y \
+    # install basics
+    curl \
+    gettext \
+    python \
+    python-pip \
+    slay \
+    vim \
+    wget \
+    # install zimbra pre-requisites
+    ant \
+    ant-contrib \
+    build-essential \
+    git \
+    maven \
+    net-tools \
+    npm \
+    openjdk-8-jdk \
+    ruby \
+    rsyslog \
+    software-properties-common
 
 WORKDIR /opt/zimbra
 COPY ./healthcheck.py ./healthcheck.py
