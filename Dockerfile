@@ -24,7 +24,6 @@ RUN apt-get update && \
     software-properties-common
 
 WORKDIR /opt/zimbra
-COPY ./healthcheck.py ./healthcheck.py
 
 RUN npm install -g n && \
     n latest && \
@@ -46,3 +45,4 @@ RUN git clone -b master https://github.com/f9teams/zm-build.git /tmp/zm-build
 
 COPY ./config.build /tmp/zm-build/config.build
 RUN cd /tmp/zm-build && ./build.pl
+COPY ./healthcheck.py ./healthcheck.py
