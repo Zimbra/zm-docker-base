@@ -17,7 +17,9 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-              docker tag f9teams/zmc-base:latest f9teams/zmc-base:${CIRCLE_SHA1}
+              short_sha=$(echo $CIRCLE_SHA1 | cut -c -7)
+
+              docker tag f9teams/zmc-base:latest f9teams/zmc-base:$short_sha
               docker tag f9teams/zmc-base:latest f9teams/zmc-base:${CIRCLE_BUILD_NUM}
 
               docker push f9teams/zmc-base:latest
