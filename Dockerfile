@@ -45,4 +45,4 @@ RUN git clone -b master https://github.com/f9teams/zm-build.git /tmp/zm-build
 
 COPY ./config.build /tmp/zm-build/config.build
 RUN cd /tmp/zm-build && ./build.pl
-COPY ./healthcheck.py ./healthcheck.py
+COPY ./healthcheck.py /zimbra/healthcheck.py
