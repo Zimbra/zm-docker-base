@@ -23,6 +23,6 @@ jobs:
               docker tag f9teams/zmc-base:latest f9teams/zmc-base:${CIRCLE_BUILD_NUM}
 
               docker push f9teams/zmc-base:latest
-              docker push f9teams/zmc-base:${CIRCLE_SHA1}
+              docker push f9teams/zmc-base:$short_sha
               docker push f9teams/zmc-base:${CIRCLE_BUILD_NUM}
             fi
