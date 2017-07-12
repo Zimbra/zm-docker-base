@@ -41,8 +41,16 @@ RUN groupadd -r zimbra && \
     # Trick build into skipping resolvconf as docker overrides for DNS
     echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 
-RUN git clone -b master https://github.com/f9teams/zm-build.git /tmp/zm-build
+RUN mkdir -p /zimbra/release && \
+    curl 'https://files.zimbra.com/downloads/8.7.11_GA/zcs-8.7.11_GA_1854.UBUNTU16_64.20170531151956.tgz' \
+    -H 'Accept-Encoding: gzip, deflate, br' \
+    -H 'Accept-Language: en-US,en;q=0.8' \
+    -H 'Upgrade-Insecure-Requests: 1' \
+    -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36' \
+    -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' \
+    -H 'Referer: https://www.zimbra.com/downloads/zimbra-collaboration-open-source/' \
+    -H 'Connection: keep-alive' \
+    --compressed -o /tmp/release-zimbra-8.tgz && \
+    tar xzvf /tmp/release-zimbra-8.tgz -C /zimbra/release --strip-components=1
 
-COPY ./config.build /tmp/zm-build/config.build
-RUN cd /tmp/zm-build && ./build.pl
 COPY ./healthcheck.py /zimbra/healthcheck.py
