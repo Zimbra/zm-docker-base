@@ -10,7 +10,11 @@ jobs:
       - run:
           name: 'Build container'
           command: |
-            docker build -t f9teams/zmc-base:latest .
+            if [ "${CIRCLE_BRANCH}" == "alpine" ]; then
+              docker build -t f9teams/zmc-base:alpine .
+            else
+              docker build -t f9teams/zmc-base:latest .
+            fi
       - deploy:
           name: 'Publisher container if master'
           command: |
@@ -25,4 +29,13 @@ jobs:
               docker push f9teams/zmc-base:latest
               docker push f9teams/zmc-base:$short_sha
               docker push f9teams/zmc-base:${CIRCLE_BUILD_NUM}
+            elif [ "${CIRCLE_BRANCH}" == "alpine" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+              short_sha=$(echo $CIRCLE_SHA1 | cut -c -7)
+              docker tag f9teams/zmc-base:alpine f9teams/zmc-base:alpine
+              docker tag f9teams/zmc-base:alpine f9teams/zmc-base:alpine-$short_sha
+              docker tag f9teams/zmc-base:alpine f9teams/zmc-base:alpine-${CIRCLE_BUILD_NUM}
+              docker push f9teams/zmc-base:alpine
+              docker push f9teams/zmc-base:alpine-$short_sha
+              docker push f9teams/zmc-base:alpine-${CIRCLE_BUILD_NUM}
             fi
