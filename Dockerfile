@@ -27,6 +27,7 @@ ENV PACKAGES="\
   # nodejs \
   nodejs-npm \
   # openjdk-8-jdk \
+  perl \
   ruby \
   rsyslog \
   util-linux \
