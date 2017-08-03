@@ -51,6 +51,7 @@ RUN mkdir -p /zimbra/release && \
     -H 'Referer: https://www.zimbra.com/downloads/zimbra-collaboration-open-source/' \
     -H 'Connection: keep-alive' \
     --compressed -o /tmp/release-zimbra-8.tgz && \
-    tar xzvf /tmp/release-zimbra-8.tgz -C /zimbra/release --strip-components=1
+    tar xzvf /tmp/release-zimbra-8.tgz -C /zimbra/release --strip-components=1 && \
+    rm /tmp/release-zimbra-8.tgz
 
 COPY ./healthcheck.py /zimbra/healthcheck.py
