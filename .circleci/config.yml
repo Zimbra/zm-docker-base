@@ -10,7 +10,7 @@ jobs:
       - run:
           name: 'Build container'
           command: |
-            docker build -t f9teams/zmc-base:latest .
+            docker build -t zimbra/zmc-base:latest .
       - deploy:
           name: 'Publisher container if master'
           command: |
@@ -19,10 +19,10 @@ jobs:
 
               short_sha=$(echo $CIRCLE_SHA1 | cut -c -7)
 
-              docker tag f9teams/zmc-base:latest f9teams/zmc-base:$short_sha
-              docker tag f9teams/zmc-base:latest f9teams/zmc-base:${CIRCLE_BUILD_NUM}
+              docker tag zimbra/zmc-base:latest zimbra/zmc-base:$short_sha
+              docker tag zimbra/zmc-base:latest zimbra/zmc-base:${CIRCLE_BUILD_NUM}
 
-              docker push f9teams/zmc-base:latest
-              docker push f9teams/zmc-base:$short_sha
-              docker push f9teams/zmc-base:${CIRCLE_BUILD_NUM}
+              docker push zimbra/zmc-base:latest
+              docker push zimbra/zmc-base:$short_sha
+              docker push zimbra/zmc-base:${CIRCLE_BUILD_NUM}
             fi
