@@ -42,7 +42,7 @@ RUN groupadd -r zimbra && \
     echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 
 RUN mkdir -p /zimbra/release && \
-    curl 'https://files.zimbra.com/downloads/8.7.11_GA/zcs-8.7.11_GA_1854.UBUNTU16_64.20170531151956.tgz' \
+    curl 'https://files.zimbra.com/downloads/8.8.1_GA/zcs-8.8.1_GA_1782.UBUNTU16_64.20170726140343.tgz' \
     -H 'Accept-Encoding: gzip, deflate, br' \
     -H 'Accept-Language: en-US,en;q=0.8' \
     -H 'Upgrade-Insecure-Requests: 1' \
