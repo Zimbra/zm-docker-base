@@ -52,6 +52,7 @@ RUN mkdir -p /zimbra/release && \
     -H 'Connection: keep-alive' \
     --compressed -o /tmp/release-zimbra-8.tgz && \
     tar xzvf /tmp/release-zimbra-8.tgz -C /zimbra/release --strip-components=1 && \
-    rm /tmp/release-zimbra-8.tgz
+    rm /tmp/release-zimbra-8.tgz && \
+    sed -i.bak 's/checkRequired/# checkRequired/' /zimbra/release/install.sh
 
 COPY ./healthcheck.py /zimbra/healthcheck.py
